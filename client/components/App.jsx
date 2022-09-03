@@ -3,54 +3,47 @@ import React, { useState, useEffect } from 'react'
 import {getMemes} from '../apiClient'
 
 function App() {
-  const[memes,setMemes] = useState([ ])
+  const[memes,setMemes] = useState(' ')
   
   useEffect(() => {
     getMemes()
-    .then((memeImg) => {
-      console.log(memeImg)
-      setMemes(memeImg)
+    .then((newMeme) => {
+      console.log('newMeme',newMeme)
+      setMemes(newMeme)
     })
-    // .then(()=> {return (memes[Math.floor(Math.random()*memes.length)])})
+    .catch((err) => {
+      console.error(err.message)
+    })
+  
     .catch((err) => {
       console.error(err.message)
     })
    
   },[])
   
+  const handleClick=()=> {
+  setMemes(memes)
+  } 
   return (
     <>    
     <div>   
       <h1> Memes</h1>
+     
+       {/* <button onClick={handleClick}> Click Me!!</button> */}
+       <button onClick={handleClick}>Click Me!!!!</button>
 
-      {memes.map((obj,i)=>{
-        return ( <img src={obj.url}></img>)
-      })}
-        
+       <img src={memes} width='600px'></img>
+    
+
+  
     </div>
-    </>    
+    </>
+  
   )  
 }
-  {/* <h1> Memes{console.log(memes[0].image)}</h1> */}
-
-   // return( i===randomNum,
-        //   <img src={item.url}/>
-        // )
-
- // getRandomeMeme()
-    // .then((randomMemeData) => {
-    //   console.log('randomMemeData',randomMemeData)
-    //   setRandomMeme(randomMemeData)
-    // })
-    // const randomMeme = memes[Math.floor(Math.random()*memes.length)]
-
-  // const getRandomeMeme =(memes) => { 
-  //   return memes[Math.floor(Math.random()*memes.length)]
-
-  // }
-  
-{/* <li key ={i}>
-          Image:<a href={obj.url} target='blank'> memememem </a>
-
-        </li> */}
+ 
+ 
 export default App
+
+
+    
