@@ -4,6 +4,7 @@ import {getMemes} from '../apiClient'
 
 function App() {
   const[memes,setMemes] = useState(' ')
+  const[meme,setMeme] = useState(' ')
   
   useEffect(() => {
     getMemes()
@@ -13,36 +14,23 @@ function App() {
     })
     .catch((err) => {
       console.error(err.message)
-    })
-  
-    .catch((err) => {
-      console.error(err.message)
-    })
-   
+    })   
   },[])
   
-  const handleClick=()=> {
-  setMemes(memes)
-  } 
+  const handleClick=()=>{  
+    let randomNum =Math.floor(Math.random()*memes.length)
+    setMeme(memes[randomNum].url)  
+  }
   return (
     <>    
     <div>   
       <h1> Memes</h1>
-     
-       {/* <button onClick={handleClick}> Click Me!!</button> */}
        <button onClick={handleClick}>Click Me!!!!</button>
-
-       <img src={memes} width='600px'></img>
-    
-
-  
+       <img src={meme} width='600px'/>
     </div>
-    </>
-  
+    </> 
   )  
 }
- 
- 
 export default App
 
 
